@@ -15,6 +15,19 @@ npm install --save feathers-openai
 > __Important:__ `feathers-openai` implements the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) and [querying syntax](https://docs.feathersjs.com/api/databases/querying.html).
 > 
 
+
+
+MULTER IS REQUIRED
+
+```javascript
+  app.use(koa_multer().any())
+  app.use(openaiMulter);
+```
+
+
+
+
+
 ## API
 
 ### `service(options)`

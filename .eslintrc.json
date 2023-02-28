@@ -10,6 +10,7 @@
   "extends": [
     "eslint:recommended"
   ],
+  "sourceType":"module",
   "rules": {
     "indent": [
       "error",

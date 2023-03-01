@@ -1,6 +1,6 @@
-import { BadRequest } from '@feathersjs/errors';
+import errorHandler from '../errorHandler.js';
 import { openaiSetup } from './openai.setup.js';
-
+import { BadRequest } from '@feathersjs/errors';
 export class FileService {
   constructor (options) {
     this.options = options;
@@ -21,22 +21,28 @@ export class FileService {
       fileBuffer,
       data.purpose
     ).then(r => r.data)
-      .catch(e => {
-        console.error(e);
-        throw new BadRequest(e.message);
-      });
+      .catch(errorHandler);
   }
 
   async find (params) {
-    return this.client.listFiles().then(r => r.data).catch(e => { console.log(e); throw new BadRequest(); });
+    return this.client.listFiles()
+      .then(r => {
+        return {
+          total: r.data?.data.length || 0,
+          limit: null,
+          skip: null,
+          data: r.data
+        };
+      })
+      .catch(errorHandler);
   }
 
   async get (id, params) {
-    return this.client.retrieveFile(id).then(r => r.data).catch(e => { console.log(e); throw new BadRequest(); });
+    return this.client.retrieveFile(id).then(r => r.data).catch(errorHandler);
   }
 
   async remove (id, params) {
-    return this.client.deleteFile(id).then(r => r.data).catch(e => { console.log(e); throw new BadRequest(); });
+    return this.client.deleteFile(id).then(r => r.data).catch(errorHandler);
   }
 
   async setup (app, path) { openaiSetup(app, this); }
@@ -49,7 +55,7 @@ export class FileContentService {
 
   async find (params) {
     if (!(params.route && params.route.id)) throw new BadRequest();
-    return this.client.downloadFile(params.route.id).then(r => r.data).catch(e => { console.log(e); throw new BadRequest(e); });
+    return this.client.downloadFile(params.route.id).then(r => r.data).catch(errorHandler);
   }
 }
 

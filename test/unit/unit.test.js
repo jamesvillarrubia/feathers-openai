@@ -43,7 +43,6 @@ describe('Configuration', () => {
   it('disallows unlisted endpoints', async () => {
     const app = feathers();
     app.configure(openai(undefined, ['models']));
-    console.log(app.get('openaiPrefix'));
     await app.setup();
     const modelService = app.service('openai/models');
     assert.ok(modelService);
@@ -69,7 +68,7 @@ describe('Hitting the OpenAI Service', () => {
     await app.setup();
     const service = app.service('openai/models');
     const result = await service.find();
-    assert.equal(result.object, 'list');
+    assert.strictEqual(result.total, 0);
   });
 
   it('can upload an image', async () => {

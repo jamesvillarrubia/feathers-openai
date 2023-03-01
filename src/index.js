@@ -15,7 +15,7 @@ export const baseMethods = ['find', 'get', 'create', 'patch', 'update', 'remove'
 export const baseEntities = ['models', 'edits', 'completions', 'images/generations', 'images/edits', 'images/variations', 'fine-tunes', 'embeddings', 'moderations', 'files'];
 
 export const openaiMulter = async (ctx, next) => {
-  ctx.feathers.files = [ctx.file, ...ctx.files].filter(f => !!f);
+  ctx.feathers.files = [ctx.file, ...(ctx.files ? ctx.files : [])].filter(f => !!f);
   await next();
 };
 

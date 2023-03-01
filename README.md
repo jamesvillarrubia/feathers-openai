@@ -6,13 +6,15 @@
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/feathers-openai)
 <!-- [![Download Status](https://img.shields.io/npm/dm/feathers-openai.svg)](https://www.npmjs.com/package/feathers-openai) -->
 
-This library is a FeathersJS database adapter for openai - a high-scale, LMDB & NodeJS database. It uses a combination of the raw openai RESTful endpoints and [KnexJS](http://knexjs.org/)-translated queries through openai's subset of supported SQL commands.  It also uses [Harperive](https://www.npmjs.com/package/harperive) for authentication, promise management, and connectivity.  Harperive is exposed internally for developers wishing to build more complex queries in a openai service.
+This library enables a series of FeathersJS services that map to the entities of the [OpenAI API](https://platform.openai.com/docs/api-reference/introduction). 
+
+By wrapping the API in a series of FeathersJS services, the OpenAI API or some portion of it can be quickly integrated into a FeathersJS endpoint.  This enables the developer to log, manipulate, wrap hooks around, direct and indirect calls to the API.
 
 ```bash
 npm install --save feathers-openai
 ```
 
-> __Important:__ `feathers-openai` implements the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) and [querying syntax](https://docs.feathersjs.com/api/databases/querying.html).
+> __Important:__ `feathers-openai` does NOT implement the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) and [querying syntax](https://docs.feathersjs.com/api/databases/querying.html).
 > 
 
 

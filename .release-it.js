@@ -1,4 +1,4 @@
-{
+module.export = {
   "github": {
     "release": true
   },
@@ -30,7 +30,8 @@
             "type": "ci",
             "release": "minor"
           }
-        ]
+        ],
+        "whatBump": ()=>null
       }
     }
   }

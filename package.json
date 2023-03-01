@@ -1,5 +1,5 @@
 {
-  "name": "feathers-openai",
+  "name": "test_releaseit_automation_flow_justincase",
   "version": "0.0.0-semantic-release",
   "description": "An open.ai adapter for FeathersJS",
   "main": "src/",
@@ -20,6 +20,7 @@
     "@babel/register": "^7.21.0",
     "@feathersjs/errors": "^5.0.0",
     "@feathersjs/koa": "^5.0.0",
+    "@release-it/conventional-changelog": "^5.1.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^9.0.1",

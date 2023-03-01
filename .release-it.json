@@ -3,9 +3,7 @@
     "release": true
   },
   "npm": {
-    "ignoreVersion": true,
-    "publish": false,
-    "skipChecks": true
+    "ignoreVersion": true
   },
   "plugins": {
     "@release-it/conventional-changelog": {
@@ -13,12 +11,32 @@
         "name": "conventionalcommits",
         "types": [
           {
+            "type": "refactor",
+            "releaseType": "patch"
+          },
+          {
+            "type": "style",
+            "releaseType": "patch"
+          },
+          {
+            "type": "perf",
+            "releaseType": "patch"
+          },
+          {
+            "type": "chore",
+            "releaseType": "patch"
+          },
+          {
+            "type": "ci",
+            "releaseType": "patch"
+          },
+          {
             "type": "feat",
-            "section": "Features"
+            "releaseType": "minor"
           },
           {
             "type": "fix",
-            "section": "Bug Fixes"
+            "releaseType": "patch"
           }
         ]
       }

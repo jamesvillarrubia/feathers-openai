@@ -12,31 +12,19 @@
         "types": [
           {
             "type": "refactor",
-            "releaseType": "patch"
+            "release": "patch"
           },
           {
             "type": "style",
-            "releaseType": "patch"
+            "release": "patch"
           },
           {
             "type": "perf",
-            "releaseType": "patch"
+            "release": "patch"
           },
           {
             "type": "chore",
-            "releaseType": "patch"
-          },
-          {
-            "type": "ci",
-            "releaseType": "major"
-          },
-          {
-            "type": "feat",
-            "releaseType": "minor"
-          },
-          {
-            "type": "fix",
-            "releaseType": "patch"
+            "release": "patch"
           }
         ]
       }

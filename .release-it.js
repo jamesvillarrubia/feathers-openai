@@ -1,6 +1,6 @@
 module.export = {
   "git":{
-    "requireCleanWorkingDir": true,
+    "requireCleanWorkingDir": false,
   },
   "github": {
     "release": true

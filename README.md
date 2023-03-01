@@ -1,4 +1,4 @@
-![NPM](https://img.shields.io/npm/l/feathers-openai)](https://github.com/jamesvillarrubia/feathers-openai/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-openai?label=latest)](https://www.npmjs.com/package/feathers-openai)
+[![NPM](https://img.shields.io/npm/l/feathers-openai)](https://github.com/jamesvillarrubia/feathers-openai/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-openai?label=latest)](https://www.npmjs.com/package/feathers-openai)
 
   
 
@@ -10,6 +10,7 @@
 
 # feathers-openai
 
+> NOTE: This library is new 
 ### Introduction
 
 This library enables a series of FeathersJS services that map to the entities and routes of the [OpenAI API](https://platform.openai.com/docs/api-reference/introduction).

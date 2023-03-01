@@ -1,4 +1,7 @@
 module.export = {
+  "git":{
+    "requireCleanWorkingDir": true,
+  },
   "github": {
     "release": true
   },
@@ -31,7 +34,10 @@ module.export = {
             "release": "minor"
           }
         ],
-        "whatBump": ()=>null
+        "whatBump": ()=>{
+          return null
+          // null
+        }
       }
     }
   }

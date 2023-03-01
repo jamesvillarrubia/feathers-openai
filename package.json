@@ -51,7 +51,7 @@
     "build": "babel src -d lib",
     "test:dev": "printf '\\33c\\e[3J' && npm run lint && npm run mocha -- --watch --esm --parallel --watch-files ./test/**/*,./lib/**",
     "coverage": "nyc npm run mocha",
-    "release": "release-it --dry-run --ci"
+    "release": "release-it --dry-run --ci --config .release-it.js"
   },
   "semistandard": {
     "env": [

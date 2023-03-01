@@ -26,7 +26,10 @@
             "type": "chore",
             "releaseType": "patch"
           },
-   
+          {
+            "type": "ci",
+            "releaseType": "major"
+          },
           {
             "type": "feat",
             "releaseType": "minor"

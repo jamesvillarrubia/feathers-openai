@@ -1,18 +1,18 @@
 name: Merge Pull Request & Publish
 
 on:
-  workflow_dispatch: # allows manual trigger
+  # workflow_dispatch: # allows manual trigger
   push:
     banches:
       - main
       - alpha
       - beta
-  pull_request:
-    types: [ closed ]
-    branches:
-      - main
-      - alpha
-      - beta
+  # pull_request:
+  #   types: [ closed ]
+  #   branches:
+  #     - main
+  #     - alpha
+  #     - beta
 
 jobs:
   test: 

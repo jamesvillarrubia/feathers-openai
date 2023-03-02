@@ -3,10 +3,10 @@ name: Lint & Test
 on:
   workflow_dispatch: # allows manual trigger
   push: 
-    # branches-ignore:
-    #   - main
-    #   - beta
-    #   - alpha
+    branches-ignore:
+      - main
+      - beta
+      - alpha
   # pull_request:
   #   branches-ignore:
   #     - main

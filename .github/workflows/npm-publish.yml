@@ -1,12 +1,17 @@
 name: Merge Pull Request & Publish
 
 on: 
-  pull_request:
-    types: [ closed ]
+  push: 
     branches:
       - main
-      - alpha
       - beta
+      - alpha
+  # pull_request:
+  #   types: [ closed ]
+  #   branches:
+  #     - main
+  #     - alpha
+  #     - beta
 jobs:
   test: 
     name: 'Node.js v${{ matrix.node }}'

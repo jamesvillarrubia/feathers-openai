@@ -1,11 +1,6 @@
 name: Merge Pull Request & Publish
 
 on: 
-  push:
-    branches:
-      - main
-      - alpha
-      - beta
   pull_request:
     types: [ closed ]
     branches:

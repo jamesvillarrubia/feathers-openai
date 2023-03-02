@@ -1,10 +1,9 @@
 name: Merge Pull Request & Publish
 
 on:
-  # workflow_dispatch: # allows manual trigger
   push:
     banches:
-      - fml
+      - "fml"
   # pull_request:
   #   types: [ closed ]
   #   branches:

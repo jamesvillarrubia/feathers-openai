@@ -1,4 +1,4 @@
-![NPM](https://img.shields.io/npm/l/feathers-openai)](https://github.com/jamesvillarrubia/feathers-openai/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-openai?label=latest)](https://www.npmjs.com/package/feathers-openai)
+[![NPM](https://img.shields.io/npm/l/feathers-openai)](https://github.com/jamesvillarrubia/feathers-openai/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-openai?label=latest)](https://www.npmjs.com/package/feathers-openai)
 
   
 
@@ -10,6 +10,7 @@
 
 # feathers-openai
 
+> NOTE: This library is new 
 ### Introduction
 
 This library enables a series of FeathersJS services that map to the entities and routes of the [OpenAI API](https://platform.openai.com/docs/api-reference/introduction).
@@ -18,9 +19,9 @@ By wrapping the API in a set of FeathersJS services, developers can quickly inte
 
 ### Features
 * All OpenAI routes get their own service (e.g. `openai/embeddings`)
-* Nested routes are included
-* Allows prefixing to prevent route overwriting via configuration
-* All OpenAI Services can be extended with hooks
+* Nested routes are included (e.g.`openai/fine-tunes/:id/cancel`)
+* Allows prefixing to prevent route overwriting (`/my-openai-prefix/models`)
+* All OpenAI Services can be extended with normal hooks
 * Allows for uploads via `multer`
 * Light validation via TypeBox on all `create` calls.
 * Can disable individual services via configuration

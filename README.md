@@ -1,149 +1,140 @@
-# feathers-openai
-                    
 [![NPM](https://img.shields.io/npm/l/feathers-openai)](https://github.com/jamesvillarrubia/feathers-openai/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-openai?label=latest)](https://www.npmjs.com/package/feathers-openai)
 
+  
+
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jamesvillarrubia/feathers-openai/Node%20Lint%20&%20Test?label=build%20%26%20lint)
+
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/feathers-openai)
-<!-- [![Download Status](https://img.shields.io/npm/dm/feathers-openai.svg)](https://www.npmjs.com/package/feathers-openai) -->
 
-This library enables a series of FeathersJS services that map to the entities of the [OpenAI API](https://platform.openai.com/docs/api-reference/introduction). 
+![Download Status](https://img.shields.io/npm/dm/feathers-openai.svg)
 
-By wrapping the API in a series of FeathersJS services, the OpenAI API or some portion of it can be quickly integrated into a FeathersJS endpoint.  This enables the developer to log, manipulate, wrap hooks around, direct and indirect calls to the API.
+# feathers-openai
 
+> NOTE: This library is new 
+### Introduction
+
+This library enables a series of FeathersJS services that map to the entities and routes of the [OpenAI API](https://platform.openai.com/docs/api-reference/introduction).
+
+By wrapping the API in a set of FeathersJS services, developers can quickly integrate any subset of the OpenAI API into their FeathersJS application. This enables the developer to log, manipulate, wrap hooks around, and make direct or indirect calls to the API.
+
+### Features
+* All OpenAI routes get their own service (e.g. `openai/embeddings`)
+* Nested routes are included (e.g.`openai/fine-tunes/:id/cancel`)
+* Allows prefixing to prevent route overwriting (`/my-openai-prefix/models`)
+* All OpenAI Services can be extended with normal hooks
+* Allows for uploads via `multer`
+* Light validation via TypeBox on all `create` calls.
+* Can disable individual services via configuration
+
+### Todo:
+[x] - Integrate all routes with FeathersJS
+[x] - Incorporate uploads via buffer streams
+[x] - Document multer example with KoaJS
+[ ] - Document multer example with ExpressJS
+[x] - Testing for uploads
+[x] - Testing for configuration
+[x] - Testing for sample services
+[ ] - Expand testing to cover all services
+
+> NOTE: PRs are welcome!
+
+### Installation
+
+To install the services, add the library as a dependency.
 ```bash
-npm install --save feathers-openai
+npm install --save feathers-openai multer @koa/multer
+```  
+In your `app.js` file, add the following middleware calls:
+```javascript
+import koamulter from '@koa/multer';
+import { openaiMulter, openai } from 'feathers-openai';
+app.use(koamulter().any());
+app.use(openaiMulter);
 ```
+The `koamulter` captures multi-part form uploads to your endpoints.  The `openaiMulter` appends the file(s) to the `ctx.feathers` object, making the buffers accessible within the hook and service `params`.  The `multer` library or equivalent is required by `koamulter`.  
 
-> __Important:__ `feathers-openai` does NOT implement the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) and [querying syntax](https://docs.feathersjs.com/api/databases/querying.html).
-> 
-
-
-
-MULTER IS REQUIRED
+In your `src/services/index.js` add the following:
 
 ```javascript
-  app.use(koa_multer().any())
-  app.use(openaiMulter);
+import { openai } from 'feathers-openai'
+
+export const services = (app) => {
+	app.configure(openai('openai'))
+	//	... other services
+}
 ```
 
+### Configuration
+__API Key in [env].json__
 
+You must add your API key in your `/config/[env].json` file. 
 
-
-
-## API
-
-### `service(options)`
-
-
-```js
-const service = require('feathers-openai');
-app.use('/messages', service({
-    //...options
-}););
-```
-
-
-__Options:__
-- `name` (**required**) - The name of the table
-- `config` (**required**) - Usually set in `config/{ENV}.json`. See "Connection Options" below
-- `client` (*optional*) - The Harperive Client, can be manually overriden and accessed
-- `id` (*optional*, default: `id`) - The name of the id field property.
-- `events` (*optional*) - A list of [custom service events](https://docs.feathersjs.com/api/events.html#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](https://docs.feathersjs.com/api/databases/common.html#pagination) containing a `default` and `max` page size
-- `multi` (*optional*) - Allow `create` with arrays and `update` and `remove` with `id` `null` to change multiple items. Can be `true` for all methods or an array of allowed methods (e.g. `[ 'remove', 'create' ]`)
-- `whitelist` (*optional*) - A list of additional query parameters to allow (e..g `[ '$regex', '$geoNear' ]`). Default is the supported `operators`
-- `sortField` (*optional*, default: `__createdtime__`) - By default all objects will be sorted ASC by created timestamp, similar to sorting by Integer auto-incremented `id` in most feather SQL operations
-- `sortDirection` (*optional*, default: `asc`) - The default sort direction, can be one of `[ 'asc', 'desc' ]`
-- `limit` (*optional*, default: `5000`) - The max number of objects to return without pagination, will be overriden by pagination settings
-- `sync` (*optional*, default: `true` ) - Setting true will create schema and table on load as part of the `service.setup()` function run by FeathersJS
-- `force` (*optional*, default: `false`) , Settign true will delete the schema on setup, starting with fresh database with every boot, much like Sequelize's `forceSync`.
-
-
-__Connection Options:__
-The connection options are passed in as a `config` object inside the options object (i.e. `harper({ config: { ...connection_options } })`)
-- `schema` (**required**) - The name of the schema (i.e. DB-equivalent) in the openai instance
-- `harperHost` (**required**) - The location of the Harper Host
-- `username` (**required**) - The username to connect with
-- `password` (**required**) - The password to connect with
-- `table` (*optional*) - The name of the table referenced by the service, defaults to the configured `name`, but can be overriden by setting `config.table`
-
-These can also be set via a "openai" configuration field in the Feathers `config/{ENV}.json`:
 ```json
-  "openai":{
-    "host": "http://localhost:9925",
-    "username": "admin",
-    "password": "password",
-    "schema": "test"
-  }
+{
+	"openai":"sk-XXXXXXXXXXXXXXXXXXXXXX"
+}
 ```
 
-## Setting up Service
-To set up your service, your service class.js and service.js files should look something like this:
+__Service Options:__
+
+- `prefix` (*optional*, default: `openai`) - The prefix added to every OpenAI service route.  This allows you to nest the services so that their common names (i.e. `model`, etc.) don't overwrite your core application services.  The default setting will result in routes like `openai/models` and `openai/fine-tunes`.
+- `allowedEntities` (*optional*, default: all).  This option allows you to disable and prevent the loading of any of the OpenAI API routes and entities.  It takes an array of entity names.  For example, setting `allowedEntities=['models']` would enable only the `openai/models` service. This list of services are:
+	- `models`
+	- `edits`
+	- `completions`
+	- `images/generations`
+	- `images/edits`
+	- `images/variations`
+	- `fine-tunes`
+	- `embeddings`
+	- `moderations`
+	- `files`
+
+### Adding Hooks
+
+The services come with no hooks by default.  You can add hooks by simply setting the hooks property after `app.configure`.  For example:
 
 ```javascript
-//books.class.js
-const { Service } = require('feathers-openai');
-exports.Books = class Books extends Service{
-  constructor(options, app) {
-    super({
-      ...options,
-      name: 'books'
-    });
-  }
-};
-
-//books.service.js
-const { Books } = require('./books.class');
-const hooks = require('./books.hooks');
-module.exports = function (app) {
-  const options = {
-    paginate: app.get('paginate'),
-    config: {
-      ...app.get('openai'),
-      table: 'books'
-    }
-  };
-  app.use('/books', new Books(options, app));
-  const service = app.service('books');
-  service.hooks(hooks);
-};
+export const services = (app) => {
+	app.configure(openai('openai'))
+	attachOpenAIhooks(app)
+	//	... other services
+}
+function attachOpenAIhooks(app){
+	app.service('openai/models).hooks({
+		before:{
+			all:[()=>console.log('in the models hook!')]
+		}
+	})
+}
 ```
 
+You can also directly leverage the service as part of another service flow, like using the AI to write a title for an article.
 
-## Querying
-
-In addition to the [common querying mechanism](https://docs.feathersjs.com/api/databases/querying.html), this adapter also supports direct NoSQL submissions via the [Harperive client](https://chandan-24.github.io/Harperive/#/) like this:
-
-
+ 
 ```javascript
-let service = app.service('books')
-await service.client.insert({
-  table: this.table,
-  records: [
-    {
-      user_id: 43,
-      username: 'simon_j',
-      first_name: 'James',
-      middle_name: 'J.',
-      last_name: 'Simon'
-    }
-  ]
+app.service('articles').hooks({
+	before:{ create:[
+		(ctx)=>{
+			let text = ctx.data.text;
+			ctx.data.title = ctx.app.service('openai/completions)
+			.create({
+				model: "text-davinci-003",
+				prompt: `Write a clickbait title for the following text:\n${text}\n####`,
+				max_tokens: 7,
+				temperature: 0,
+				stop:'###'
+			}).then(r=>r.choices[0].text)
+		}]
+	}
 })
-.then((res) => console.log(res))
-.catch((err) => console.log(err));
 ```
 
-You can also use Harperive's generic execution option like so:
-```javascript
-const options = {
-  operation: 'openai_operation',
-  //other fields...
-};
 
-// Promise
-let service = app.service('books')
-await service.client.executeOperation(options)
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
-```
+### Known Limitations
+__Adapter Syntax:__ `feathers-openai` does NOT implement the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) 
+
+__Pagination:__  The current OpenAI API does not demonstrate how they will provide pagination for large responses, so for `find` method calls, the `total`, `$limit` and `$skip` are server-side manipulations of the OpenAI response and will not reduce the call on the OpenAI side.   Any calls to `find` will return the standard feathers object `{ total:x ... data:[...]}` but `create` , `get`, `remove`,`update` will return as close to the original OpenAI response.  
+
+__Queries/Search:__ There is NO query capability for the OpenAI API so it is not implemented here.  This library does not implement the FeathersJS [querying syntax](https://docs.feathersjs.com/api/databases/querying.html). 
 

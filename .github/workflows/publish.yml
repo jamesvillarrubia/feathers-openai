@@ -11,6 +11,9 @@ jobs:
   test: 
     name: 'Node.js v${{ matrix.node }}'
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     strategy:
       matrix:
         node:
@@ -35,11 +38,15 @@ jobs:
         run: npm run lint
       - name: Run tests
         run: npm run coverage
+
   release:
     name: Release
     needs: test
     if: github.ref_name == 'main'
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -61,6 +68,9 @@ jobs:
     name: PreRelease
     if: github.ref_name != 'main'
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -74,6 +84,3 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npx release-it --ci --preRelease=${{github.ref_name}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

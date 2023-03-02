@@ -48,7 +48,7 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-      - run: npx release-it --dry-run --ci --npm.skipChecks
+      - run: npx release-it --ci --npm.skipChecks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -64,7 +64,7 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npm run build --if-present
-      - run: npx release-it --dry-run --ci --preRelease=${{github.ref_name}} --npm.skipChecks
+      - run: npx release-it --ci --preRelease=${{github.ref_name}} --npm.skipChecks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

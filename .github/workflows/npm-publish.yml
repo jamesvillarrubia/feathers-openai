@@ -45,12 +45,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
       - run: npm ci
       - run: npm run build --if-present
       - run: npx release-it --ci --npm.skipChecks
@@ -66,12 +66,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
       - run: npm ci
       - run: npm run build --if-present
       - run: npx release-it --ci --preRelease=${{github.ref_name}} --npm.skipChecks

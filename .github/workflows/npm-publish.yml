@@ -50,7 +50,7 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npm run build --if-present
-      - run: npx release-it --dry-run --ci --npm.skipChecks
+      - run: npx release-it --ci --npm.skipChecks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

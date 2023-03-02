@@ -7,7 +7,11 @@ on:
       - main
       - beta
       - alpha
-
+  pull_request:
+    branches-ignore:
+      - main
+      - beta
+      - alpha
 jobs:
   test: 
     name: 'Node.js v${{ matrix.node }}'

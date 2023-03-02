@@ -9,7 +9,7 @@ module.exports = {
   },
   "npm": {
     "ignoreVersion": true,
-    "publish": false,
+    "publish": true,
     "skipChecks": true
   },
   "plugins": {

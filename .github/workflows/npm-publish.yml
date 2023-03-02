@@ -1,4 +1,4 @@
-name: Merge Pull Request & Publish
+name: Publish
 
 on: 
   push: 

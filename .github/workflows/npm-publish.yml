@@ -1,3 +1,5 @@
+name: Merge Pull Request & Publish
+
 on: 
   push:
     branches:

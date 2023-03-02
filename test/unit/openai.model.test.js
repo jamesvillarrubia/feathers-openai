@@ -1,6 +1,6 @@
 
 import assert from 'assert';
-import feathers from 'f5';
+import feathers from '@feathersjs/feathers';
 import { openai } from '../../src/index.js';
 import nock from 'nock';
 const app = feathers();

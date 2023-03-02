@@ -8,6 +8,7 @@ on:
       - beta
       - alpha
   pull_request:
+    types: [opened,reopened,synchronize]
     branches-ignore:
       - main
       - beta

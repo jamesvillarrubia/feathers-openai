@@ -10,7 +10,7 @@
 
 # feathers-openai
 
-> NOTE: This library is new 
+> NOTE: This library is new and APIs may change as features stablize.  
 ### Introduction
 
 This library enables a series of FeathersJS services that map to the entities and routes of the [OpenAI API](https://platform.openai.com/docs/api-reference/introduction).
@@ -26,15 +26,15 @@ By wrapping the API in a set of FeathersJS services, developers can quickly inte
 * Light validation via TypeBox on all `create` calls.
 * Can disable individual services via configuration
 
-### Todo:
-[x] - Integrate all routes with FeathersJS
-[x] - Incorporate uploads via buffer streams
-[x] - Document multer example with KoaJS
-[ ] - Document multer example with ExpressJS
-[x] - Testing for uploads
-[x] - Testing for configuration
-[x] - Testing for sample services
-[ ] - Expand testing to cover all services
+### Todo
+- [x] - Integrate all routes with FeathersJS
+- [x] - Incorporate uploads via buffer streams
+- [x] - Document multer example with KoaJS
+- [ ] - Document multer example with ExpressJS
+- [x] - Testing for uploads
+- [x] - Testing for configuration
+- [x] - Testing for sample services
+- [ ] - Expand testing to cover all services
 
 > NOTE: PRs are welcome!
 

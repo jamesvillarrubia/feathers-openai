@@ -6,12 +6,7 @@ on:
       - main
       - beta
       - alpha
-  # pull_request:
-  #   types: [ closed ]
-  #   branches:
-  #     - main
-  #     - alpha
-  #     - beta
+
 jobs:
   test: 
     name: 'Node.js v${{ matrix.node }}'

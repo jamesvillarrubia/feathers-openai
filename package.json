@@ -1,6 +1,6 @@
 {
   "name": "feathers-openai",
-  "version": "0.0.0-release-it",
+  "version": "0.0.4-alpha.0",
   "description": "An open.ai adapter for FeathersJS",
   "main": "src/",
   "types": "lib/",

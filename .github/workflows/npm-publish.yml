@@ -47,7 +47,6 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
-      - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
       - run: npx release-it --ci --npm.skipChecks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

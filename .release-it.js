@@ -1,13 +1,16 @@
 module.exports = {
   "git":{
-    "requireCleanWorkingDir": false
+    "requireCleanWorkingDir": false,
+    "commit": false,
+    "pushArgs": ["--tags"]
   },
   "github": {
     "release": true
   },
   "npm": {
     "ignoreVersion": true,
-    "publish": false
+    "publish": false,
+    "skipChecks": true
   },
   "plugins": {
     "@release-it/conventional-changelog": {

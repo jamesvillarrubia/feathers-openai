@@ -4,9 +4,7 @@ on:
   # workflow_dispatch: # allows manual trigger
   push:
     banches:
-      - main
-      - alpha
-      - beta
+      - fml
   # pull_request:
   #   types: [ closed ]
   #   branches:

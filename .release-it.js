@@ -6,7 +6,8 @@ module.exports = {
     "release": true
   },
   "npm": {
-    "ignoreVersion": true
+    "ignoreVersion": true,
+    "publish": false
   },
   "plugins": {
     "@release-it/conventional-changelog": {

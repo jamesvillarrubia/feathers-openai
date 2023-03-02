@@ -53,7 +53,7 @@ jobs:
           git config user.email github-actions@github.com
       - run: npm ci
       - run: npm run build --if-present
-      - run: npx release-it --ci --npm.skipChecks
+      - run: npx release-it --ci --npm.skipChecks --git.pushArgs=--follow-tags --git.pushArgs=--force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -74,7 +74,7 @@ jobs:
           git config user.email github-actions@github.com
       - run: npm ci
       - run: npm run build --if-present
-      - run: npx release-it --ci --preRelease=${{github.ref_name}} --npm.skipChecks
+      - run: npx release-it --ci --preRelease=${{github.ref_name}} --npm.skipChecks --git.pushArgs=--follow-tags --git.pushArgs=--force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

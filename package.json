@@ -1,5 +1,5 @@
 {
-  "name": "test_releaseit_automation_flow_justincase",
+  "name": "feathers-openai",
   "version": "0.0.0-release-it",
   "description": "An open.ai adapter for FeathersJS",
   "main": "src/",
@@ -8,37 +8,30 @@
     "lib": "lib",
     "test": "test"
   },
-  "peerDependencies": {
-    "@feathersjs/errors": "^5.0.0 || ^4.5.12",
+  "dependencies": {
+    "@feathersjs/errors": "^5.0.0",
+    "@feathersjs/feathers": "^5.0.0",
+    "@feathersjs/schema": "^5.0.0",
+    "@feathersjs/typebox": "^5.0.0",
     "openai": "^3.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
     "@babel/preset-env": "^7.20.2",
     "@babel/register": "^7.21.0",
-    "@feathersjs/errors": "^5.0.0",
     "@feathersjs/koa": "^5.0.0",
+    "@feathersjs/adapter-tests": "^5.0.0",
     "@release-it/conventional-changelog": "^5.1.1",
-    "@semantic-release/commit-analyzer": "^9.0.2",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/npm": "^9.0.1",
-    "app-root-path": "^3.1.0",
     "cors": "^2.8.5",
     "eslint": "^8.34.0",
-    "f4": "npm:@feathersjs/feathers@^4.0.0",
-    "f4_exp": "npm:@feathersjs/express@^4.0.0",
-    "f5": "npm:@feathersjs/feathers@^5.0.0",
-    "f5_exp": "npm:@feathersjs/express@^5.0.0",
     "koa-multer": "^1.0.2",
     "mocha": "^10.2.0",
+    "multer": "^1.4.5-lts.1",
     "nock": "^13.3.0",
     "nyc": "^15.1.0",
     "release-it": "^15.7.0",
-    "semantic-release": "^20.1.0",
-    "semistandard": "^16.0.1",
-    "supertest": "^6.3.3"
+    "semistandard": "^16.0.1"
   },
   "engines": {
     "node": ">= 16"
@@ -46,7 +39,6 @@
   "scripts": {
     "lint": "semistandard --fix",
     "mocha": "mocha --require @babel/register --recursive test/**/*.test.js",
-    "testd": "docker-compose up -d && npm run test && docker-compose down",
     "test": "printf '\\33c\\e[3J' && npm run lint && npm run coverage",
     "build": "babel src -d lib",
     "test:dev": "printf '\\33c\\e[3J' && npm run lint && npm run mocha -- --watch --esm --parallel --watch-files ./test/**/*,./lib/**",
@@ -65,11 +57,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jamesvillarrubia/feathers-rpc.git"
+    "url": "git+https://github.com/jamesvillarrubia/feathers-openai.git"
   },
   "keywords": [
     "feathers",
-    "rpc",
+    "openai",
     "nlp",
     "feathers-plugin"
   ],
@@ -77,24 +69,10 @@
     "name": "James Villarrubia",
     "email": "james.villarrubia@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "James Villarrubia",
-      "email": "james.villarrubia@gmail.com"
-    },
-    {
-      "name": "Ben Zelinski",
-      "email": "bziggz@gmail.com"
-    }
-  ],
+  "contributors": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jamesvillarrubia/feathers-rpc/issues"
+    "url": "https://github.com/jamesvillarrubia/feathers-openai/issues"
   },
-  "homepage": "https://github.com/jamesvillarrubia/feathers-rpc#readme",
-  "dependencies": {
-    "@feathersjs/adapter-tests": "^5.0.0",
-    "@feathersjs/schema": "^5.0.0",
-    "@feathersjs/typebox": "^5.0.0"
-  }
+  "homepage": "https://github.com/jamesvillarrubia/feathers-openai#readme"
 }

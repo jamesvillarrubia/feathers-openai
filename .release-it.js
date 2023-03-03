@@ -47,7 +47,7 @@ module.exports = {
           if (commit.type === 'feat') {
             features += 1;
           }
-          return options.preMajor ? level+1 : level
+          return options.preMajor && level<2 ? level+1 : level
         }))
 
         return {

@@ -17,6 +17,9 @@ This library enables a series of FeathersJS services that map to the entities an
 
 By wrapping the API in a set of FeathersJS services, developers can quickly integrate any subset of the OpenAI API into their FeathersJS application. This enables the developer to log, manipulate, wrap hooks around, and make direct or indirect calls to the API.
 
+### Motivation
+Exposing OpenAI within a secure enterprise environment comes with inherent risk, given the likely high volume of text data that leaves your system. By consolidating OpenAI behind a Feathers service, we can get the benefits of both a secure proxy and the control that comes with individualized authentication and query filtering. Feathers-openai can be both a quick way to integrate OpenAI into an application as well as a quick way to scale an enterprise gateway to the OpenAI API with all of the benefits of FeathersJS baked in (Auth mgmt, API key mgmt, custom mutations and resolvers, etc.)
+
 ### Features
 * All OpenAI routes get their own service (e.g. `openai/embeddings`)
 * Nested routes are included (e.g.`openai/fine-tunes/:id/cancel`)
@@ -25,6 +28,19 @@ By wrapping the API in a set of FeathersJS services, developers can quickly inte
 * Allows for uploads via `multer`
 * Light validation via TypeBox on all `create` calls.
 * Can disable individual services via configuration
+
+## Compatability
+This library and the services included are tested against REST APIs for Feathers v5. The examples below demonstrate the use of uploads for KoaJS only, though Express is probably very similar. 
+
+Additional testing and PRs are welcome.
+
+| feathers  | v5                 | v4                 | v3              | 
+|-----------|--------------------|--------------------|-----------------|
+| express   | :white_check_mark: | :grey_question:    | :grey_question: |  
+| koa       | :white_check_mark: | :grey_question:    | :grey_question: |  
+| primus    | :grey_question:    | :grey_question:    | :grey_question: |
+| socket.io | :grey_question:    | :grey_question:    | :grey_question: |
+
 
 ### Todo
 - [x] - Integrate all routes with FeathersJS
@@ -137,4 +153,3 @@ __Adapter Syntax:__ `feathers-openai` does NOT implement the [Feathers Common da
 __Pagination:__  The current OpenAI API does not demonstrate how they will provide pagination for large responses, so for `find` method calls, the `total`, `$limit` and `$skip` are server-side manipulations of the OpenAI response and will not reduce the call on the OpenAI side.   Any calls to `find` will return the standard feathers object `{ total:x ... data:[...]}` but `create` , `get`, `remove`,`update` will return as close to the original OpenAI response.  
 
 __Queries/Search:__ There is NO query capability for the OpenAI API so it is not implemented here.  This library does not implement the FeathersJS [querying syntax](https://docs.feathersjs.com/api/databases/querying.html). 
-
